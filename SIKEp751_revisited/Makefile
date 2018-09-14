@@ -15,7 +15,7 @@ USE_OPT_LEVEL=_OPTIMIZED_FAST_
 AR=ar rcs
 RANLIB=ranlib
 
-CFLAGS=$(OPT) -std=gnu99 -D $(ARCHITECTURE) -D __LINUX__ -D $(USE_OPT_LEVEL)
+CFLAGS=$(OPT) -pg -static -std=gnu99 -D $(ARCHITECTURE) -D __LINUX__ -D $(USE_OPT_LEVEL)
 LDFLAGS=-lm
 EXTRA_OBJECTS_751=objs751/fp_arm64.o objs751/fp_arm64_asm.o objs751/fp_arm64_asm_comba.o
 OBJECTS_751=objs751/P751.o $(EXTRA_OBJECTS_751) objs/random.o objs/fips202.o
