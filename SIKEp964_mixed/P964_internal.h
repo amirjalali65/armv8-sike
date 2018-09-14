@@ -128,6 +128,15 @@ void from_Montgomery_mod_order(const digit_t* ma, digit_t* c, const digit_t* ord
 // Inversion modulo Alice's order 2^372.
 void inv_mod_orderA(const digit_t* a, digit_t* c);
 
+void fpadd964_arm64_asm(const digit_t* a, const digit_t* b, digit_t* c);
+
+void fpsub964_arm64_asm(const digit_t* a, const digit_t* b, digit_t* c);
+
+void fpsub1024_arm64(digit_t* a, digit_t* b, digit_t* c);
+
+void fpadd1024_arm64(digit_t* a, digit_t* b, digit_t* c);
+
+void rdc964_arm64_asm(const digit_t* ma, digit_t *mc);
 /************ Field arithmetic functions *************/
 
 // Copy of a field element, c = a

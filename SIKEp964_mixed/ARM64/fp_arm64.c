@@ -16,8 +16,8 @@
 
 
 // Global constants
-extern const uint64_t p964[NWORDS_FIELD];
-extern const uint64_t p964p1[NWORDS_FIELD]; 
+extern const digit_t p964[NWORDS_FIELD];
+extern const digit_t p964p1[NWORDS_FIELD]; 
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -84,7 +84,7 @@ void fpcorrection964(digit_t* a)
     }
 }
 
-void fpmul2x256_mixed_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpmul2x256_mixed_arm64(const digit_t* a, const digit_t* b, digit_t* c)
 {
     // Multiplication of a * b using mixed assembly
     // c[0...7] = a[0...3] * b[0...3] -> ASIMD assembly
@@ -524,7 +524,7 @@ void fpmul2x256_mixed_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
     ); 
 }
 
-void fpadd256_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpadd256_arm64(const digit_t* a, const digit_t* b, digit_t* c)
 {    //Add two 256-bit values
     asm(
 
@@ -547,7 +547,7 @@ void fpadd256_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
     );
 }
 
-void fpadd576_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpadd576_arm64(const digit_t* a, const digit_t* b, digit_t* c)
 {   // Add two 576-bit values
     asm(
 
@@ -582,7 +582,7 @@ void fpadd576_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
     );
 }
 
-void fpsub576_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpsub576_arm64(digit_t *a, digit_t *b, digit_t *c)
 {   // Sub two 576-bit values
     asm(
 
@@ -621,7 +621,7 @@ void fpsub576_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
     );
 }
 
-void fpmul320_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpmul320_arm64(const digit_t* a, const digit_t* b, digit_t *c)
 {   // multiplication of two 320-bit values
     asm(
         
@@ -764,7 +764,7 @@ void fpmul320_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
     );
 }
 
-void fpmul256_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpmul256_arm64(const digit_t* a, const digit_t* b, digit_t *c)
 {   // Multiplication of two 256-bit values
     asm(
         "ldp x3, x4, [%0]           \n\t"
@@ -858,7 +858,7 @@ void fpmul256_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
     );
 }
 
-void fpadd512_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpadd512_arm64(const digit_t* a, const digit_t* b, digit_t *c)
 {   // Add two 512-bit values
     asm(
 
@@ -890,12 +890,12 @@ void fpadd512_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
     );
 }
 
-void fpmul512_karatsuba(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpmul512_karatsuba(const digit_t *a, const digit_t *b, digit_t *c)
 {
     // level-two Karatsuba
-    uint64_t aplus512[5];
-    uint64_t bplus512[5];
-    uint64_t rplus512[10];
+    digit_t aplus512[5];
+    digit_t bplus512[5];
+    digit_t rplus512[10];
     fpmul2x256_mixed_arm64(a, b, c);
     fpadd256_arm64(a, a+4, aplus512);
     fpadd256_arm64(b, b+4, bplus512);
@@ -908,9 +908,9 @@ void fpmul512_karatsuba(uint64_t *a, uint64_t *b, uint64_t *c)
 void mp_mul(const digit_t* a, const digit_t* b, digit_t* c, const unsigned int nwords)
 {
     // level-one Karatsuba
-    uint64_t aplus[8];
-    uint64_t bplus[8];
-    uint64_t rplus[16];
+    digit_t aplus[8];
+    digit_t bplus[8];
+    digit_t rplus[16];
 
     fpmul512_karatsuba(a, b, c);
     fpmul512_karatsuba(&a[8], &b[8], &c[16]);
@@ -922,7 +922,7 @@ void mp_mul(const digit_t* a, const digit_t* b, digit_t* c, const unsigned int n
 	fpadd1024_arm64(&c[8], rplus, &c[8]);
 }
 
-void rdc_mont(const uint64_t *ma, uint64_t *mc)
+void rdc_mont(const digit_t *ma, digit_t *mc)
 { // Optimized Montgomery reduction using comba and exploiting the special form of the prime p964.
   // mc = ma*mb*R^-1 mod p964, where ma,mb,mc in [0, p964-1] and R = 2^1024.
   // ma and mb are assumed to be in Montgomery representation.

@@ -60,8 +60,7 @@ void fpmul_mont(const felm_t ma, const felm_t mb, felm_t mc)
     dfelm_t temp = {0};
     //dfelm_t temp2 = {0};
 
-    //mp_mul(ma, mb, temp, NWORDS_FIELD);
-    mp_mul_mixed(ma, mb, temp, NWORDS_FIELD);
+    mp_mul(ma, mb, temp, NWORDS_FIELD);
     rdc_mont(temp, mc);
     
 }
@@ -71,8 +70,7 @@ void fpsqr_mont(const felm_t ma, felm_t mc)
 { // Multiprecision squaring, c = a^2 mod p.
     dfelm_t temp = {0};
 
-    mp_mul_mixed(ma, ma, temp, NWORDS_FIELD);
-    //fpsqr768_asm(temp, ma);
+    mp_mul(ma, ma, temp, NWORDS_FIELD);
     rdc_mont(temp, mc);
 }
 

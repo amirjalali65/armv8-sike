@@ -10,10 +10,10 @@
 #include "../P751_internal.h"
 
 // Global constants
-extern const uint64_t p751[NWORDS_FIELD];
-extern const uint64_t p751x2[NWORDS_FIELD]; 
+extern const digit_t p751[NWORDS_FIELD];
+extern const digit_t p751x2[NWORDS_FIELD]; 
 
-void fpmul2x384_mixed_arm64(uint64_t *a, uint64_t *b, uint64_t *c, uint64_t *aplusbplus)
+void fpmul2x384_mixed_arm64(const digit_t* a, const digit_t* b, digit_t *c, digit_t *aplusbplus)
 {   
     // This function computes al * bl and ah * bh where a and b are 768-bit integers
     // The function computes the result of multiplication using mixed AARCH64 and ASIMD assembly 
@@ -1347,7 +1347,7 @@ void fpmul2x384_mixed_arm64(uint64_t *a, uint64_t *b, uint64_t *c, uint64_t *apl
     );    
 }
 
-void fpmul448_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpmul448_arm64(digit_t *a, digit_t *b, digit_t *c)
 {
     // Multiplication of two 384-bit integers using aarch64 assembly
     // Operation:
@@ -1727,7 +1727,7 @@ void fpmul448_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
 }
 
 
-void fpadd384_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpadd384_arm64(digit_t *a, digit_t *b, digit_t *c)
 {    //Add two 384-bit values when there is no carry overflow
      // Operation:
      // c[0...6] = a[0...6] + b[0...6]
@@ -1762,7 +1762,7 @@ void fpadd384_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
     );
 }
 
-void fpsub768_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpsub768_arm64(digit_t *a, digit_t *b, digit_t *c)
 {   // Sub two 768-bit values
    asm volatile(
 
@@ -1812,7 +1812,7 @@ void fpsub768_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
     );
 }
 
-void fpadd832_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpadd832_arm64(digit_t *a, digit_t *b, digit_t *c)
 {   // add two 768-bit values and propagate the carry overflow
     // operation 
     // c[0...12] = a[0...12] + b[0...12]
@@ -1866,7 +1866,7 @@ void fpadd832_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
     );
 }
 
-void fpmul384_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpmul384_arm64(digit_t *a, digit_t *b, digit_t *c)
 {
     // Multiplication of two 384-bit integers using aarch64 assembly
     // Operation:
@@ -2151,9 +2151,9 @@ void fpmul384_arm64(uint64_t *a, uint64_t *b, uint64_t *c)
 
 
 
-void fpmul768_karatsuba(uint64_t *a, uint64_t *b, uint64_t *c)
+void fpmul768_karatsuba(const digit_t* a, const digit_t* b, digit_t *c)
 {
-    uint64_t rplus[14];
+    digit_t rplus[14];
 
     fpmul2x384_mixed_arm64(a, b, c, rplus);
     fpsub768_arm64(rplus, c, rplus);
@@ -2161,7 +2161,7 @@ void fpmul768_karatsuba(uint64_t *a, uint64_t *b, uint64_t *c)
     fpadd832_arm64(c+6, rplus, c+6);
 }
 
-void fpsqr768_asm(uint64_t *res, uint64_t *a){
+void fpsqr768_asm(digit_t *res, digit_t *a){
     
    asm volatile(	
         //step 1
@@ -2945,15 +2945,6 @@ void fpcorrection751(digit_t* a)
 
 void mp_mul(const digit_t* a, const digit_t* b, digit_t* c, const unsigned int nwords)
 { // Multiprecision multiply, c = a*b, where lng(a) = lng(b) = nwords.
-
-	UNREFERENCED_PARAMETER(nwords);
-	//mul751_asm(a, b, c);
-	fpmul768_karatsuba(a, b, c);
-}
-
-void mp_mul_mixed(const digit_t* a, const digit_t* b, digit_t* c, const unsigned int nwords)
-{
- // Multiprecision multiply, c = a*b, where lng(a) = lng(b) = nwords.
 
 	UNREFERENCED_PARAMETER(nwords);
 	fpmul768_karatsuba(a, b, c);
