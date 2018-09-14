@@ -2,9 +2,7 @@
 //
 // Abstract: Assembly optimizations for finite field arithmetic on 64-bit ARM. 
 //
-// Author: Amir Jalali
-// Affiliation: Florida Atlantic University
-// Date: Aug 2016
+// Microsoft Research Code	
 // 
 //**********************************************************************************
 
