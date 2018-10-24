@@ -4,11 +4,9 @@ Highly-optimized ARMv8 implementation of Supersingular Isogeny Key Encapsulation
 The efficient implementation of SIKE protocol on ARMv8 high-perforamnce processors. 
 The finite field arithmetic implementation is developed by the state-of-the-art implementation techniques, taking advantage of ARMv8 64-bit general purpose registers combined with ASIMD vectorization. The field multiplication is designed and developed using one- and two-level additive Karatsuba method. The independent multiplications are implemented using both AArch64 and ASIMD hand-crafted assembly using an interleaved technique  to maximize the pipeline throuhput and efficiency of the library. 
 
-The submitted SIKE proposal contains the optimized implementation of SIKEp503 and SIKEp751 on different platforms. This repositoy contains the missing implementation for optimized portable implementation of SIKEp964 and highly-optimized implementation of SIKEp503, SIKEp751, and SIKEp964 on ARMv8 platforms. 
+The submitted SIKE proposal contains the optimized implementation of SIKEp503 and SIKEp751 on different platforms. This repositoy contains the highly-optimized implementation of SIKEp503, SIKEp751, and SIKEp964 on ARMv8 platforms. 
 
 ## Content
-[Optimized_Implementation](https://github.com/amirjalali65/armv8-sike/tree/master/Optimized_Implementation/portable): In addition to the optimized implementation of SIKE mechanism which is submitted to the NIST standardization, this directory contains the portable version of optimized implementation of SIKEp964.
-
 [SIKEp503](https://github.com/amirjalali65/armv8-sike/tree/master/SIKEp503): Optimized implementaion of SIKEp503 using only 64-bit general registers (Designed and developed by Matthew Campagna)
 
 [SIKEp503_mixed](https://github.com/amirjalali65/armv8-sike/tree/master/SIKEp503_mixed): Optimized implementation of SIKEp503 using the mixture of general registers and ASIMD vectorization hand-written assembly.
