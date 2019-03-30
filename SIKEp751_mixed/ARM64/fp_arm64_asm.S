@@ -3,7 +3,6 @@
 //
 // Abstract: field arithmetic in ARM64 assembly for P751 on Linux
 //
-// Author: Matthew Campagna
 //
 //*******************************************************************************************
 
