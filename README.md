@@ -31,7 +31,7 @@ $ make CC=aarch64-linux-gnu-gcc ARCH=ARM64
 Now, the generated binaries can be run on ARMv8-A cores. 
 
 ## Contributors
-* All the mixed arithmetic libraries are designed and developed by [Amir Jalali, Reza Azarderakhsh](ajalali2016@fau.edu, razarderakhsh@fau.edu)
+* All the mixed arithmetic libraries are designed and developed by Amir Jalali, Reza Azarderakhsh: (ajalali2016@fau.edu, razarderakhsh@fau.edu)
 * The SIKE optimized implementation (portable) is designed and developed by Microsoft Research and the SIKE team.
 * The arithmetic libraries using general registers are designed and developed by Matthew Campagna
 
