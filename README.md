@@ -7,11 +7,11 @@ The finite field arithmetic implementation is developed by the state-of-the-art 
 The submitted SIKE proposal contains the optimized implementation of SIKEp503 and SIKEp751 on different platforms. This repositoy contains the highly-optimized implementation of SIKEp503, SIKEp751, and SIKEp964 on ARMv8 platforms. 
 
 ## Content
-[SIKEp503](https://github.com/amirjalali65/armv8-sike/tree/master/SIKEp503): Optimized implementaion of SIKEp503 using only 64-bit general registers (Designed and developed by Matthew Campagna)
+[SIKEp503](https://github.com/amirjalali65/armv8-sike/tree/master/SIKEp503): Optimized implementaion of SIKEp503 using only 64-bit general registers 
 
 [SIKEp503_mixed](https://github.com/amirjalali65/armv8-sike/tree/master/SIKEp503_mixed): Optimized implementation of SIKEp503 using the mixture of general registers and ASIMD vectorization hand-written assembly.
 
-[SIKEp751](https://github.com/amirjalali65/armv8-sike/tree/master/SIKEp751): Optimized implementaion of SIKEp751 using only 64-bit general registers (Designed and developed by Matthew Campagna)
+[SIKEp751](https://github.com/amirjalali65/armv8-sike/tree/master/SIKEp751): Optimized implementaion of SIKEp751 using only 64-bit general registers
 
 [SIKEp751_mixed](https://github.com/amirjalali65/armv8-sike/tree/master/SIKEp751_mixed): Optimized implementation of SIKEp751 using the mixture of general registers and ASIMD vectorization hand-written assembly.
 
