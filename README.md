@@ -2,6 +2,7 @@
 Highly-optimized ARMv8 implementation of Supersingular Isogeny Key Encapsulation (SIKE).
 
 The efficient implementation of SIKE protocol on ARMv8 high-performance processors. For more details please see: https://ieeexplore.ieee.org/abstract/document/8768333
+
 The finite field arithmetic implementation is developed by the state-of-the-art implementation techniques, taking advantage of ARMv8 64-bit general purpose registers combined with ASIMD vectorization. The field multiplication is designed and developed using one- and two-level additive Karatsuba method. The independent multiplications are implemented using both AArch64 and ASIMD hand-crafted assembly using an interleaved technique  to maximize the pipeline throuhput and efficiency of the library. 
 
 The submitted SIKE proposal contains the optimized implementation of SIKEp503 and SIKEp751 on different platforms. This repositoy contains the highly-optimized implementation of SIKEp503, SIKEp751, and SIKEp964 on ARMv8 platforms. 
